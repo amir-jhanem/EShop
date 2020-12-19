@@ -9,9 +9,11 @@ using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
 using EShop.Web.Interfaces;
 using EShop.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EShop.Web.Areas.ControlPanel.Pages.Products
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly IProductPageService _productPageService;
