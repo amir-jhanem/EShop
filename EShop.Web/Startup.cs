@@ -9,6 +9,8 @@ using EShop.Infrastructure.Data;
 using EShop.Infrastructure.Logging;
 using EShop.Infrastructure.Repository;
 using EShop.Infrastructure.Repository.Base;
+using EShop.Web.Interfaces;
+using EShop.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -89,6 +91,7 @@ namespace EShop.Web
 
             // Add Web Layer
             services.AddAutoMapper(typeof(Startup)); // Add AutoMapper
+            services.AddScoped<IProductPageService, ProductPageService>();
 
             // Add Miscellaneous
             services.AddHttpContextAccessor();

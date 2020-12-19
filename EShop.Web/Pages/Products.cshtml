@@ -2,18 +2,27 @@
 @model EShop.Web.Pages.ProductsModel
 @{
 }
-<div class="card-deck">
+
+<h2 class="font-weight-bold mb-2">From the Shop</h2>
+<p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+
+<div class="row pb-5 mb-4">
     @if (Model.ProductList.Any())
     {
         foreach (var item in Model.ProductList)
         {
-            <div class="card">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <!-- Card-->
+                <div class="card rounded shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <img src="@item.ImageFile" alt="" class="img-fluid d-block mx-auto mb-3">
+                        <h5> <a href="#" class="text-dark">@item.Name</a></h5>
+                        <p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <span>@item.UnitPrice $</span>
+                    </div>
                 </div>
             </div>
         }
     }
+
 </div>
