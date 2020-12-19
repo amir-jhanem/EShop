@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Core", "EShop.Core\ES
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Infrastructure", "EShop.Infrastructure\EShop.Infrastructure.csproj", "{A007D43F-B501-4F04-B938-F9043162F251}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Web", "EShop.Web\EShop.Web.csproj", "{8EB8B6BA-A102-476F-8B1D-631DDAB6862D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Web", "EShop.Web\EShop.Web.csproj", "{8EB8B6BA-A102-476F-8B1D-631DDAB6862D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

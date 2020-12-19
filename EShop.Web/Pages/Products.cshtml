@@ -1,0 +1,19 @@
+﻿@page
+@model EShop.Web.Pages.ProductsModel
+@{
+}
+<div class="card-deck">
+    @if (Model.ProductList.Any())
+    {
+        foreach (var item in Model.ProductList)
+        {
+            <div class="card">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        }
+    }
+</div>

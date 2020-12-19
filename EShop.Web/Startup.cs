@@ -1,5 +1,14 @@
+using AutoMapper;
+using EShop.Application.Interfaces;
+using EShop.Application.Services;
 using EShop.Core.Configuration;
+using EShop.Core.Interfaces;
+using EShop.Core.Repositories;
+using EShop.Core.Repositories.Core;
 using EShop.Infrastructure.Data;
+using EShop.Infrastructure.Logging;
+using EShop.Infrastructure.Repository;
+using EShop.Infrastructure.Repository.Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -70,6 +79,19 @@ namespace EShop.Web
             // Add Infrastructure Layer
             ConfigureDatabases(services);
             ConfigureIdentity(services);
+
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            // Add Application Layer
+            services.AddScoped<IProductService, ProductService>();
+
+            // Add Web Layer
+            services.AddAutoMapper(typeof(Startup)); // Add AutoMapper
+
+            // Add Miscellaneous
+            services.AddHttpContextAccessor();
         }
 
         public void ConfigureDatabases(IServiceCollection services)
