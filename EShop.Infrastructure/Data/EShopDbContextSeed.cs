@@ -1,5 +1,9 @@
 ﻿using EShop.Core.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,10 +14,11 @@ namespace EShop.Infrastructure.Data
 {
     public class EShopDbContextSeed
     {
-        public static async Task SeedAsync(EShopDbContext eshopDbContext, ILoggerFactory loggerFactory, int? retry = 0)
+        public static async Task SeedAsync(IServiceProvider services, ILoggerFactory loggerFactory, int? retry = 0)
         {
             int retryForAvailability = retry.Value;
 
+            var eshopDbContext = services.GetRequiredService<EShopDbContext>();
             try
             {
                 eshopDbContext.Database.Migrate();
@@ -21,6 +26,15 @@ namespace EShop.Infrastructure.Data
 
                 // products
                 await SeedProductsAsync(eshopDbContext);
+
+                // roles
+                await SeedRolesAsync(services);
+
+                // admins
+                await SeedAdminAsync(services);
+
+                // customers
+                await SeedCustomersAsync(services);
             }
             catch (Exception exception)
             {
@@ -29,7 +43,7 @@ namespace EShop.Infrastructure.Data
                     retryForAvailability++;
                     var log = loggerFactory.CreateLogger<EShopDbContext>();
                     log.LogError(exception.Message);
-                    await SeedAsync(eshopDbContext, loggerFactory, retryForAvailability);
+                    await SeedAsync(services, loggerFactory, retryForAvailability);
                 }
                 throw;
             }
@@ -44,29 +58,29 @@ namespace EShop.Infrastructure.Data
             {
                 new Product()
                 {
-                    Name = "IPhone - Black",
-                    ImageFile = "https://cdn.pixabay.com/photo/2013/07/12/18/39/smartphone-153650_960_720.png",
+                    Name = "Kindle - Black",
+                    ImageFile = "https://picsum.photos/id/367/200/200",
                     UnitPrice = 150,
                     UnitsInStock = 10
                 },
                 new Product()
                 {
-                    Name = "PC Monitor",
-                    ImageFile = "https://cdn.pixabay.com/photo/2012/04/13/15/03/monitor-32743_960_720.png",
+                    Name = "Laptop",
+                    ImageFile = "https://picsum.photos/id/180/200/200",
                     UnitPrice = 200,
                     UnitsInStock = 5
                 },
                 new Product()
                 {
                     Name = "Mac Collection",
-                    ImageFile = "https://cdn.pixabay.com/photo/2017/05/11/11/15/workplace-2303851_960_720.jpg",
+                    ImageFile = "https://picsum.photos/id/201/200/200",
                     UnitPrice = 900,
                     UnitsInStock = 6
                 },
                 new Product()
                 {
-                    Name = "Keyboard",
-                    ImageFile = "https://cdn.pixabay.com/photo/2013/07/13/11/50/computer-158770_960_720.png",
+                    Name = "Camera",
+                    ImageFile = "https://picsum.photos/id/250/200/200",
                     UnitPrice = 1000,
                     UnitsInStock = 20
                 }
@@ -74,6 +88,35 @@ namespace EShop.Infrastructure.Data
 
             eshopDbContext.Products.AddRange(products);
             await eshopDbContext.SaveChangesAsync();
+        }
+
+        private static async Task SeedCustomersAsync(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+
+            var user = new IdentityUser { UserName = "amir.jhanem93@gmail.com", Email = "amir.jhanem93@gmail.com" };
+            await userManager.CreateAsync(user, "123456");
+        }
+
+        private static async Task SeedAdminAsync(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+
+            var user = new IdentityUser { UserName = "admin@example.com", Email = "admin@example.com" };
+            var result = await userManager.CreateAsync(user, "123456");
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "Admin");
+            }
+        }
+
+        private static async Task SeedRolesAsync(IServiceProvider services)
+        {
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+            var role = new IdentityRole { Name = "Admin" };
+            await roleManager.CreateAsync(role);
         }
     }
 }

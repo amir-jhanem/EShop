@@ -1,6 +1,7 @@
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -31,8 +32,7 @@ namespace EShop.Web
 
                 try
                 {
-                    var eshopDbContext = services.GetRequiredService<EShopDbContext>();
-                    EShopDbContextSeed.SeedAsync(eshopDbContext, loggerFactory).Wait();
+                    EShopDbContextSeed.SeedAsync(services, loggerFactory).Wait();
                 }
                 catch (Exception exception)
                 {
