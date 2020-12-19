@@ -10,5 +10,9 @@ namespace EShop.Application.Interfaces
     {
         Task<IEnumerable<ProductModel>> GetProductList();
         Task<IEnumerable<ProductModel>> GetProductByName(string productName);
+        Task<ProductModel> Create(ProductModel productModel);
+        Task Delete(ProductModel productModel);
+        Task Update(ProductModel productModel);
+        Task<ProductModel> GetProductById(int id);
     }
 }
