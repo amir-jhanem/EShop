@@ -107,6 +107,7 @@ namespace EShop.Web
         {
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<EShopDbContext>();
 
             services.Configure<IdentityOptions>(options =>
