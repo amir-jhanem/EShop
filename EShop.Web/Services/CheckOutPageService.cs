@@ -25,6 +25,7 @@ namespace EShop.Web.Services
         public async Task<OrderModel> CheckOut(OrderViewModel order, string userId)
         {
             var mappedOrderModel = _mapper.Map<OrderModel>(order);
+            mappedOrderModel.UserId = userId;
             return await _orderAppService.CheckOut(mappedOrderModel);
         }
     }

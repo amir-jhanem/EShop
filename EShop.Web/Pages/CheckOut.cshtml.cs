@@ -63,6 +63,8 @@ namespace EShop.Web.Pages
                 }
             };
 
+            Order.GrandTotal = Order.Items.Sum(x => x.TotalPrice);
+
             var order = await _checkOutPageService.CheckOut(Order, _userManager.GetUserId(User));
             return RedirectToPage("OrderSubmitted", new { id = order.Id });
         }

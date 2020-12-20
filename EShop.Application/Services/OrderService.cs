@@ -23,6 +23,13 @@ namespace EShop.Application.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        public async Task<IEnumerable<OrderModel>> GetOrderList()
+        {
+            var orderList = await _orderRepository.GetAllAsync();
+            var mapped = ObjectMapper.Mapper.Map<IEnumerable<OrderModel>>(orderList);
+            return mapped;
+        }
+
         public async Task<OrderModel> GetOrderById(int id)
         {
             var order = await _orderRepository.GetByIdAsync(id);

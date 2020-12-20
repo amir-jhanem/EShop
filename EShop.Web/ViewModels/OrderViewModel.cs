@@ -13,29 +13,25 @@ namespace EShop.Web.ViewModels
         public string ShippingAddress { get; set; }
         [Required]
         public PaymentMethodView PaymentMethod { get; set; }
-        public int Status { get; set; } = 1; // Processing
+        public OrderStatusView Status { get; set; } =  OrderStatusView.Progress;
+        public string UserId { get; set; }
 
         public List<OrderItemViewModel> Items { get; set; } = new List<OrderItemViewModel>();
 
-        public decimal GrandTotal
-        {
-            get
-            {
-                decimal grandTotal = 0;
-                foreach (var item in Items)
-                {
-                    grandTotal += item.TotalPrice;
-                }
-
-                return grandTotal;
-            }
-        }
+        public decimal GrandTotal { get; set; }
 
         public enum PaymentMethodView
         {
             Cash = 1,
             BankTransfer = 2,
             Paypal = 3
+        }
+
+        public enum OrderStatusView
+        {
+            Progress = 1,
+            OnShipping = 2,
+            Finished = 3
         }
     }
 }

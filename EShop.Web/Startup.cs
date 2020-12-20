@@ -95,6 +95,7 @@ namespace EShop.Web
             services.AddAutoMapper(typeof(Startup)); // Add AutoMapper
             services.AddScoped<IProductPageService, ProductPageService>();
             services.AddScoped<ICheckOutPageService, CheckOutPageService>();
+            services.AddScoped<IOrderPageService, OrderPageService>();
 
             // Add Miscellaneous
             services.AddHttpContextAccessor();

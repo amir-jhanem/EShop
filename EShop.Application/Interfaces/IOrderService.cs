@@ -10,5 +10,6 @@ namespace EShop.Application.Interfaces
     {
         Task<OrderModel> CheckOut(OrderModel orderModel);
         Task<OrderModel> GetOrderById(int id);
+        Task<IEnumerable<OrderModel>> GetOrderList();
     }
 }

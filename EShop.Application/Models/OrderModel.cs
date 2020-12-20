@@ -11,6 +11,7 @@ namespace EShop.Application.Models
         public PaymentMethodModel PaymentMethod { get; set; }
         public OrderStatusModel Status { get; set; }
         public decimal GrandTotal { get; set; }
+        public string UserId { get; set; }
 
         public List<OrderItemModel> Items { get; set; } = new List<OrderItemModel>();
     }

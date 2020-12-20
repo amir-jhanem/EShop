@@ -1,0 +1,30 @@
+﻿@page
+@model EShop.Web.Areas.ControlPanel.Pages.IndexModel
+@{
+    ViewData["Title"] = "Control Panel";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="row pb-5 mb-4">
+    <div class="col-md-6 mb-4">
+        <!-- Card-->
+        <div class="card rounded shadow-sm border-0">
+            <div class="card-body p-4">
+                <h1 class="text-center">@Model.OrdersCount Order</h1>
+            </div>
+            <div class="card-footer">
+                <a id="controlPanel" class="btn btn-block btn-info" asp-area="ControlPanel" asp-page="/Orders/Index" title="Manage Orders">Manage Orders</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <!-- Card-->
+        <div class="card rounded shadow-sm border-0">
+            <div class="card-body p-4">
+                <h1 class="text-center">@Model.ProductsCount Product</h1>
+            </div>
+            <div class="card-footer">
+                <a id="controlPanel" class="btn btn-block btn-info" asp-area="ControlPanel" asp-page="/Products/Index" title="Manage Products">Manage Products</a>
+            </div>
+        </div>
+    </div>
+</div>

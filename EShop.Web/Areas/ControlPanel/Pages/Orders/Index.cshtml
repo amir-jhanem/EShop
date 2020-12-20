@@ -1,0 +1,51 @@
+﻿@page
+@model EShop.Web.Areas.ControlPanel.Pages.Orders.IndexModel
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Orders</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Shipping Address
+            </th>
+            <th>
+                Payment Method
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                GrandTotal
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrandTotal)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
