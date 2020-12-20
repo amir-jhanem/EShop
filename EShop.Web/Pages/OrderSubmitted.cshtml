@@ -1,0 +1,9 @@
+﻿@page
+@model EShop.Web.Pages.OrderSubmittedModel
+@{
+}
+<div class="text-center">
+    <h1 class="display-4">Thank you for shopping with us</h1>
+    <h3>Your Order Number #@Model.OrderId</h3>
+    <a class="btn btn-info" asp-area="" asp-page="/Products">Go to Products</a>
+</div>

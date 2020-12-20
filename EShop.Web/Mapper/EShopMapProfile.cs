@@ -13,6 +13,8 @@ namespace EShop.Web.Mapper
         public EShopMapProfile()
         {
             CreateMap<ProductModel, ProductViewModel>().ReverseMap();
+            CreateMap<OrderModel, OrderViewModel>().ReverseMap();
+            CreateMap<OrderItemModel, OrderItemViewModel>().ReverseMap();
         }
     }
 }

@@ -85,13 +85,16 @@ namespace EShop.Web
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
             // Add Application Layer
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             // Add Web Layer
             services.AddAutoMapper(typeof(Startup)); // Add AutoMapper
             services.AddScoped<IProductPageService, ProductPageService>();
+            services.AddScoped<ICheckOutPageService, CheckOutPageService>();
 
             // Add Miscellaneous
             services.AddHttpContextAccessor();

@@ -1,0 +1,45 @@
+﻿@page
+@model EShop.Web.Pages.CheckOutModel
+@{
+}
+
+<div class="row pb-5 mb-4">
+
+    <div class="col-md-6 mb-4">
+        <!-- Card-->
+        <div class="card rounded shadow-sm border-0">
+            <div class="card-body p-4">
+                <img src="@Model.Product.ImageFile" alt="" class="img-fluid d-block mx-auto mb-3">
+                <h5> <a href="#" class="text-dark">@Model.Product.Name</a></h5>
+                <p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <span>@Model.Product.UnitPrice $</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" class="form-control" value="@Model.Product.Id" />
+
+            <div class="form-group">
+                <label asp-for="Order.ShippingAddress" class="control-label"></label>
+                <input asp-for="Order.ShippingAddress" class="form-control" />
+                <span asp-validation-for="Order.ShippingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="payment_cash">Cash on delivery</label>
+                <input asp-for="Order.PaymentMethod" type="radio" id="payment_cash" value="1">
+                <label for="payment_bank">Bank Transfer</label>
+                <input asp-for="Order.PaymentMethod" type="radio" id="payment_bank" value="2">
+                <label for="payment_paypal">Paypal</label>
+                <input asp-for="Order.PaymentMethod" type="radio" id="payment_paypal" value="3">
+                <span asp-validation-for="Order.PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Place Order" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+
+</div>
