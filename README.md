@@ -1,6 +1,6 @@
 # E-Commerce Asp.net core clean architecture sample
 
-E-Commerce is a desktop cross platform web app using Razor Pages and sqlite database.
+E-Commerce is a cross platform web app using Razor Pages and sqlite database.
 
 ### Structure of Project
 Repository include layers divided by **4 project**;
